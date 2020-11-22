@@ -1,13 +1,17 @@
 # -*- coding: utf-8 -*-
 import re
 
+
 class Persona:
-    def __init__(self, nombre, run, correo, password, sexo):
+    def __init__(self, nombre, peso, altura, run, correo, password, sexo):
         self.nombre = nombre
+        self.peso = peso
+        self.altura = altura
         self.run = run
         self.correo = correo
         self.password = password
         self.sexo = sexo
+
 
 class App:
     def __init__(self):
@@ -16,9 +20,12 @@ class App:
     def registrarPersona(self, lista_personas, persona):
         lista_personas.append([
             persona.nombre,
+            persona.peso,
+            persona.altura,
             persona.run,
             persona.correo,
-            persona.password
+            persona.password,
+            persona.sexo,
         ])
 
     def calcularIMC(self, peso, altura):
@@ -47,15 +54,16 @@ class App:
             elif 29.0 <= imc < 38.0:
                 estado_nutriconal = "Obesidad Severa"
             elif 38.0 <= imc:
-                estado_nutriconal = "Obesidad Severa"
+                estado_nutriconal = "Obesidad Muy Severa"
         return estado_nutriconal
 
     def validarCorreo(self, correo):
-        pattern = r'^\w+[\w|\d]*@\w+[\w|\d]*.\w{2,3}$'
+        pattern = r'^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$'
         return re.match(pattern, correo)
 
     def validadSexo(self, sexo):
-        listaValida = ['f','F','mujer','Mujer','h','H','Hombre','hombre']
+        listaValida = ['f', 'F', 'mujer',
+                       'Mujer', 'h', 'H', 'Hombre', 'hombre']
         if sexo in listaValida:
             return True
 
@@ -72,5 +80,12 @@ class App:
         }
         return listaValida[sexo]
 
-    def calcularContrasena(self, correo,run):
-        return  correo.split('@')[0] + run[:4]
+    def calcularContrasena(self, correo, run):
+        return correo.split('@')[0] + run[:4]
+
+    def escribirArchivo(self, lista_personas):
+        test_txt = open("test.txt", "w+")
+        for i in lista_personas:
+            largo = len(i) - 1
+            test_txt.write(','.join(i))
+        test_txt.close()
