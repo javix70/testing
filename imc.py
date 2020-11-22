@@ -2,14 +2,14 @@
 import re
 
 class Persona:
-    def __init__(self, nombre, run, correo, password):
+    def __init__(self, nombre, run, correo, password, sexo):
         self.nombre = nombre
         self.run = run
         self.correo = correo
         self.password = password
+        self.sexo = sexo
 
 class App:
-
     def __init__(self):
         pass
 
@@ -54,5 +54,23 @@ class App:
         pattern = r'^\w+[\w|\d]*@\w+[\w|\d]*.\w{2,3}$'
         return re.match(pattern, correo)
 
-    def calcularContrasena(self, correo,rut):
-        return  correo.split('@')[0] + rut[:4]
+    def validadSexo(self, sexo):
+        listaValida = ['f','F','mujer','Mujer','h','H','Hombre','hombre']
+        if sexo in listaValida:
+            return True
+
+    def parseSexo(self, sexo):
+        listaValida = {
+            'f': 'F',
+            'F': 'F',
+            'mujer': 'F',
+            'Mujer': 'F',
+            'h': 'H',
+            'H': 'H',
+            'Hombre': 'H',
+            'hombre': 'H'
+        }
+        return listaValida[sexo]
+
+    def calcularContrasena(self, correo,run):
+        return  correo.split('@')[0] + run[:4]
