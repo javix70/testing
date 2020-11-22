@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-
 import unittest
 from imc import registrarPersona, lista_personas, calcularIMC, validarCorreo, calcularContrasena
+
 class TestImc(unittest.TestCase):
 
     def setUp(self):
