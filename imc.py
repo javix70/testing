@@ -29,7 +29,7 @@ class App:
         ])
 
     def calcularIMC(self, peso, altura):
-        return peso/altura**2
+        return round(peso/altura**2, 2)
 
     def mostrarEstadoNutricional(self, sexo, imc):
         estado_nutriconal = ""
@@ -58,12 +58,12 @@ class App:
         return estado_nutriconal
 
     def validarCorreo(self, correo):
-        pattern = r'^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$'
+        pattern = r'[\w\d!#$%&\'*+\/=?^_\`{|}~-]+(?:\.[\w\d!#$%&\'*+\/=?^_\`{|}~-]+)*@(?:[\w\d](?:[\w\d-]*[\w\d])?\.)+[\w\d](?:[\w\d-]*[\w\d])?'
         return re.match(pattern, correo)
 
-    def validadSexo(self, sexo):
+    def validarSexo(self, sexo):
         listaValida = ['f', 'F', 'mujer',
-                       'Mujer', 'h', 'H', 'Hombre', 'hombre']
+                       'Mujer', 'm', 'M', 'Hombre', 'hombre']
         if sexo in listaValida:
             return True
 
@@ -73,8 +73,8 @@ class App:
             'F': 'F',
             'mujer': 'F',
             'Mujer': 'F',
-            'h': 'H',
-            'H': 'H',
+            'm': 'H',
+            'M': 'H',
             'Hombre': 'H',
             'hombre': 'H'
         }

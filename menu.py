@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from imc import App, Persona
 
-
 class Menu:
 
     def __init__(self, lista_personas):
@@ -15,6 +14,7 @@ class Menu:
             print("(3) Salir del sistema")
             op = input("\tElija un a opcion: ")
             if "3" == op:
+                print('Hasta la próxima')
                 break
             elif "2" == op:
                 app = App()
@@ -26,7 +26,7 @@ class Menu:
                     input('Ingresa identificador persona: '))
                 persona = self.lista_personas[posicion_persona]
                 peso = int(persona[1])
-                altura = int(persona[2])
+                altura = float(persona[2])
                 sexo = persona[6]
                 calculo_imc = app.calcularIMC(peso, altura)
                 estado_nutricional = app.mostrarEstadoNutricional(
@@ -45,7 +45,7 @@ class Menu:
 
                 if not app.validarCorreo(correo):
                     print("\el correo no es valido ")
-                elif not app.validadSexo(sexo):
+                elif not app.validarSexo(sexo):
                     print("\el sexo no es valido ")
                 else:
                     password = app.calcularContrasena(correo, run)
